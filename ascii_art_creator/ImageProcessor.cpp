@@ -6,11 +6,10 @@
 #include "ImageProcessor.h"
 
 ImageProcessor::ImageProcessor() {
-    readFile();
 }
 
 ImageProcessor::~ImageProcessor() {}
 
-void ImageProcessor::readFile() {
+void ImageProcessor::showImage() {
     std::cout << "BmpProcessor" << std::endl;
 }

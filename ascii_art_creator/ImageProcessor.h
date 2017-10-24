@@ -9,11 +9,9 @@
 class ImageProcessor {
 
 public:
-    ImageProcessor();
+    explicit ImageProcessor();
     virtual ~ImageProcessor();
-
-protected:
-    virtual void readFile();
+    virtual void showImage();
 };
 
 
