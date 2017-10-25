@@ -6,6 +6,7 @@
 #define CPP_MAGIC_ASCII_ART_CREATOR_TEAM_BMPPROCESSOR_HPP
 
 #include <iostream>
+#include <cmath>
 #include "ImageProcessor.h"
 #include "EasyBMP.h"
 

@@ -12,7 +12,9 @@ set(SOURCE_FILES
         easybmp/EasyBMP_BMP.h
         easybmp/EasyBMP_DataStructures.h
         easybmp/EasyBMP_VariousBMPutilities.h
-        main.cpp)
+        lodepng/lodepng.h
+        lodepng/lodepng.cpp
+        main.cpp ascii_art_creator/PngProcessor.hpp)
 
 add_executable(cpp_magic_ascii_art_creator_team ${SOURCE_FILES})
-include_directories(easybmp)
+include_directories(easybmp lodepng)
