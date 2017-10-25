@@ -1,6 +1,6 @@
 #include <iostream>
 #include "ascii_art_creator/BmpProcessor.hpp"
-#include "Parser.h"
+#include "ArgumentsParser.h"
 
 
 using namespace std;

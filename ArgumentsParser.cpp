@@ -3,7 +3,7 @@
 //
 
 
-#include "Parser.h"
+#include "ArgumentsParser.h"
 
 Parser::Parser(int argc, char* argv[])
     : valid(false), colored(false), oversized(false) {
