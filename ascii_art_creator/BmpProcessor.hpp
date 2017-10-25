@@ -19,36 +19,17 @@ public:
 
     virtual ~BmpProcessor() {}
 
-    void showImage() override {
-        // declare and read the bitmap
-
-        // convert each pixel to grayscale using RGB->YUV
+    void grayscale() override {
+        std::vector<unsigned char> rowOfPixels;
         for (int j = 0; j < Input.TellHeight(); j++) {
+            rowOfPixels.clear();
             for (int i = 0; i < Input.TellWidth(); i++) {
-                auto Temp = (int) floor(0.299 * Input(i, j)->Red +
+                unsigned char pixel = (int) floor(0.299 * Input(i, j)->Red +
                                        0.587 * Input(i, j)->Green +
                                        0.114 * Input(i, j)->Blue);
-                if (Temp > 220) {
-                    std::cout << " ";
-                } else if (Temp > 190) {
-                    std::cout << ".";
-                } else if (Temp > 160) {
-                    std::cout << "*";
-                } else if (Temp > 130) {
-                    std::cout << ":";
-                } else if (Temp > 100) {
-                    std::cout << "o";
-                } else if (Temp > 70) {
-                    std::cout << "&";
-                } else if (Temp > 40) {
-                    std::cout << "8";
-                } else if (Temp > 10) {
-                    std::cout << "#";
-                } else {
-                    std::cout << "@";
-                }
+                rowOfPixels.push_back(pixel);
             }
-            std::cout << '\n';
+            grayscaleImage.push_back(rowOfPixels);
         }
     }
 

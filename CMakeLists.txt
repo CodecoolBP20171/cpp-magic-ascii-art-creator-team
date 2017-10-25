@@ -4,6 +4,7 @@ project(cpp_magic_ascii_art_creator_team)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
+        ascii_art_creator/PngProcessor.hpp
         ascii_art_creator/BmpProcessor.hpp
         ascii_art_creator/ImageProcessor.cpp
         ascii_art_creator/ImageProcessor.h
@@ -14,7 +15,7 @@ set(SOURCE_FILES
         easybmp/EasyBMP_VariousBMPutilities.h
         lodepng/lodepng.h
         lodepng/lodepng.cpp
-        main.cpp ascii_art_creator/PngProcessor.hpp)
+        main.cpp)
 
 add_executable(cpp_magic_ascii_art_creator_team ${SOURCE_FILES})
 include_directories(easybmp lodepng)
