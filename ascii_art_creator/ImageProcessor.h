@@ -5,13 +5,21 @@
 #ifndef CPP_MAGIC_ASCII_ART_CREATOR_TEAM_IMAGEPROCESSOR_H
 #define CPP_MAGIC_ASCII_ART_CREATOR_TEAM_IMAGEPROCESSOR_H
 
+#include <iostream>
+#include <vector>
 
 class ImageProcessor {
 
 public:
     explicit ImageProcessor();
     virtual ~ImageProcessor();
-    virtual void showImage();
+    virtual void processImage();
+    void showASCIIart();
+
+protected:
+    unsigned width;
+    unsigned height;
+    std::vector<unsigned> picture;
 };
 
 
