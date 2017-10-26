@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES
         ascii_art_creator/PngProcessor.hpp
         ascii_art_creator/BmpProcessor.hpp
+        ascii_art_creator/JpgProcessor.hpp
         ascii_art_creator/ImageProcessor.cpp
         ascii_art_creator/ImageProcessor.h
         easybmp/EasyBMP.cpp
@@ -15,7 +16,8 @@ set(SOURCE_FILES
         easybmp/EasyBMP_VariousBMPutilities.h
         lodepng/lodepng.h
         lodepng/lodepng.cpp
+        nanojpeg/nanojpeg.c
         main.cpp)
 
 add_executable(cpp_magic_ascii_art_creator_team ${SOURCE_FILES})
-include_directories(easybmp lodepng)
+include_directories(easybmp lodepng nanojpeg)
