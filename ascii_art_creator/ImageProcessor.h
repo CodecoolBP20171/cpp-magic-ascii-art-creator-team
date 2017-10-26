@@ -17,6 +17,7 @@ public:
     virtual void showImage();
     void writeToFile();
     void convertToAscii();
+    void resize(float);
 
 protected:
     std::vector<std::vector<unsigned char>> grayscaleImage;
