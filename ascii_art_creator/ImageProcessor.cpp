@@ -21,9 +21,9 @@ void ImageProcessor::showImage() {
     }
 }
 
-void ImageProcessor::writeToFile() {
+void ImageProcessor::writeToFile(std::string newFileName) {
     std::ofstream filename;
-    filename.open("ascii.txt");
+    filename.open(newFileName);
     for (int i = 0; i < grayscaleImage.size(); ++i) {
         for (int j = 0; j < grayscaleImage[i].size(); ++j) {
             filename << grayscaleImage[i][j];
@@ -60,7 +60,7 @@ void ImageProcessor::convertToAscii() {
     }
 }
 
-void ImageProcessor::grayscale() {}
+void ImageProcessor::processImage(bool) {}
 
 void ImageProcessor::resize(float percentage) {
     std::vector<std::vector<unsigned char>> tempImage;

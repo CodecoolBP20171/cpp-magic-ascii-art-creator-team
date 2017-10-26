@@ -1,7 +1,7 @@
 //
 // Created by András on 2017. 10. 25..
 //
-#include "nanojpeg.c"
+#include "../nanojpeg/nanojpeg.c"
 #include "ImageProcessor.h"
 #include <iostream>
 #include <fstream>
@@ -48,13 +48,17 @@ public:
 
     virtual ~JpgProcessor() {};
 
-    void grayscale() override {
+    void processImage(bool isAlreadyGreyscale) override {
         int pngIndex = 0;
         std::vector<unsigned char> rowOfPixels;
         for(int y = 0; y < height; y++) {
             rowOfPixels.clear();
             for(int x = 0; x < width; x++) {
-                rowOfPixels.push_back(floor((0.3 * image[pngIndex] + (0.59 * image[pngIndex+1]) + (0.11 * image[pngIndex+2]))));
+                if(isAlreadyGreyscale){
+                    rowOfPixels.push_back(image[pngIndex]);
+                } else {
+                    rowOfPixels.push_back(floor((0.3 * image[pngIndex] + (0.59 * image[pngIndex+1]) + (0.11 * image[pngIndex+2]))));
+                }
                 pngIndex += 3;
             }
             grayscaleImage.push_back(rowOfPixels);

@@ -19,14 +19,19 @@ public:
 
     virtual ~BmpProcessor() {}
 
-    void grayscale() override {
+    void processImage(bool isAlreadyGrayscale) override {
         std::vector<unsigned char> rowOfPixels;
         for (int j = 0; j < Input.TellHeight(); j++) {
             rowOfPixels.clear();
             for (int i = 0; i < Input.TellWidth(); i++) {
-                unsigned char pixel = (int) floor(0.299 * Input(i, j)->Red +
-                                       0.587 * Input(i, j)->Green +
-                                       0.114 * Input(i, j)->Blue);
+                unsigned char pixel;
+                if(isAlreadyGrayscale) {
+                    pixel = (int)(Input(i, j)->Red);
+                } else {
+                    pixel = (int) floor(0.299 * Input(i, j)->Red +
+                                        0.587 * Input(i, j)->Green +
+                                        0.114 * Input(i, j)->Blue);
+                }
                 rowOfPixels.push_back(pixel);
             }
             grayscaleImage.push_back(rowOfPixels);

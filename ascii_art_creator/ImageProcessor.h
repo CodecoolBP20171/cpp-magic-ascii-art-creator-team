@@ -13,9 +13,9 @@ class ImageProcessor {
 public:
     explicit ImageProcessor();
     virtual ~ImageProcessor();
-    virtual void grayscale();
+    virtual void processImage(bool isAlreadyGrayscale);
     virtual void showImage();
-    void writeToFile();
+    void writeToFile(std::string newFileName);
     void convertToAscii();
     void resize(float);
 
