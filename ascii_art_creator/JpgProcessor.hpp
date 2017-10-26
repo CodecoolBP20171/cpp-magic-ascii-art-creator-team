@@ -10,13 +10,14 @@
 class JpgProcessor: public ImageProcessor {
 
 public:
-    explicit JpgProcessor(int argc, char* argv[]) {
+    explicit JpgProcessor(std::string filename) {
+        const char * filenameToOpen = filename.c_str();
         FILE * pfile;
         long lsize;
         char * buffer;
         size_t result;
 
-        pfile = fopen(argv[1], "rb");
+        pfile = fopen(filenameToOpen, "rb");
         if(nullptr == pfile) {fputs("File error", stderr); exit(1);}
 
         // obtain file size

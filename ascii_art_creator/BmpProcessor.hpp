@@ -13,8 +13,9 @@
 class BmpProcessor : public ImageProcessor {
 
 public:
-    explicit BmpProcessor(int argc, char* argv[]) {
-        Input.ReadFromFile(argv[1]);
+    explicit BmpProcessor(std::string filename) {
+        const char * filenameToOpen = filename.c_str();
+        Input.ReadFromFile(filenameToOpen);
     }
 
     virtual ~BmpProcessor() {}

@@ -10,8 +10,7 @@
 class PngProcessor: public ImageProcessor {
 
 public:
-    explicit PngProcessor(int argc, char* argv[]) {
-        std::string filename = argv[1];
+    explicit PngProcessor(std::string filename) {
         unsigned error = lodepng::decode(image, width, height, filename);
         if(error) std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
     };

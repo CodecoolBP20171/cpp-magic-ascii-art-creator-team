@@ -41,7 +41,7 @@ void Parser::parseArguments() {
     if (args.size() >= 4) {
         if (args[2] == "-t") {
             setFileTypeFromFileType();
-        } else if (!validResizeValueAtIndex(3)) {
+        } else if (args.size() == 4 && !validResizeValueAtIndex(3)) {
             valid = false;
         }
     }
@@ -51,14 +51,18 @@ void Parser::parseArguments() {
     if (args.size() >= 5) {
         if (args[4] == "-color") {
                 colored = true;
-        } else if (!validResizeValueAtIndex(4)) {
+        } else if (args.size() == 5 && !validResizeValueAtIndex(4)) {
             valid = false;
         }
     }
 
     if (args.size() == 5) return;
 
-    if (args.size() >= 6 && !validResizeValueAtIndex(5)) { valid = false; }
+    if (args.size() >= 6) {
+        if(args.size() == 6 && !validResizeValueAtIndex(5)) {
+            valid = false;
+        }
+    }
 
     if (args.size() == 7) {
         if (args[6] == "-color") {
@@ -90,9 +94,16 @@ void Parser::setFileTypeFromFileType() {
         fileType = "jpg";
         valid = true;
     } else if (args[3] == "png") {
-        fileType = "jpg";
+        fileType = "png";
         valid = true;
-    } else valid = false;
+    } else {
+        valid = false;
+        return;
+    }
+    std::string temp = fileName.substr(fileName.size()-4, 4);
+    if(!(temp == ".bmp" || temp == ".jpg" || temp == ".png")){
+        fileName = fileName + "." + fileType;
+    }
 }
 
 bool Parser::validResizeValueAtIndex(int index) {
