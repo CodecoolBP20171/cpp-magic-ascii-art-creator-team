@@ -17,6 +17,16 @@ public:
 
     bool isValid() const;
 
+    const std::string &getFileName() const;
+
+    const std::string &getFileType() const;
+
+    bool isColored() const;
+
+    bool isOversized() const;
+
+    float getResize() const;
+
 private:
     std::vector<std::string> args;
     bool valid;
@@ -24,7 +34,7 @@ private:
     std::string fileType;
     bool colored;
     bool oversized;
-    double resize;
+    float resize;
 
     void parseArguments();
     void setFileTypeFromFileName();

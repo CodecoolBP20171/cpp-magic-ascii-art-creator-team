@@ -6,7 +6,7 @@
 #include "ArgumentsParser.h"
 
 Parser::Parser(int argc, char* argv[])
-    : valid(false), colored(false), oversized(false) {
+    : valid(false), colored(false), oversized(false), resize(1) {
     if (argc < 3) {
         return;
     }
@@ -24,7 +24,9 @@ void Parser::parseArguments() {
 
     fileName = args[1];
 
-    if (args.size() == 2 || args[2] != "-t") { setFileTypeFromFileName(); }
+    if (args.size() == 2 || args[2] != "-t") {
+        setFileTypeFromFileName();
+    }
 
     if (args.size() == 2) return;
 
@@ -46,28 +48,37 @@ void Parser::parseArguments() {
 
     if (args.size() == 4) return;
 
-    if (args.size() == 5) {
+    if (args.size() >= 5) {
         if (args[4] == "-color") {
                 colored = true;
         } else if (!validResizeValueAtIndex(4)) {
             valid = false;
         }
-        return;
     }
 
-    if (args.size() != 6 || !validResizeValueAtIndex(5)) { valid = false; }
+    if (args.size() == 5) return;
+
+    if (args.size() >= 6 && !validResizeValueAtIndex(5)) { valid = false; }
+
+    if (args.size() == 7) {
+        if (args[6] == "-color") {
+            colored = true;
+        } else if (!validResizeValueAtIndex(6)) { valid = false; }
+    }
 }
 
 void Parser::setFileTypeFromFileName() {
-    if (args[1].compare(args[1].size()-4,4,".bmp") == 0) {
-        fileType = "bmp";
-        valid = true;
-    } else if (args[1].compare(args[1].size()-4,4,".jpg") == 0) {
-        fileType = "jpg";
-        valid = true;
-    } else if (args[1].compare(args[1].size()-4,4,".png") == 0) {
-        fileType = "png";
-        valid = true;
+    if (args[1].size() >= 5) {
+        if (args[1].compare(args[1].size() - 4, 4, ".bmp") == 0) {
+            fileType = "bmp";
+            valid = true;
+        } else if (args[1].compare(args[1].size() - 4, 4, ".jpg") == 0) {
+            fileType = "jpg";
+            valid = true;
+        } else if (args[1].compare(args[1].size() - 4, 4, ".png") == 0) {
+            fileType = "png";
+            valid = true;
+        }
     }
 }
 
@@ -85,13 +96,34 @@ void Parser::setFileTypeFromFileType() {
 }
 
 bool Parser::validResizeValueAtIndex(int index) {
-    if (args[index-1] == "-r"
-        && std::all_of(args[index].begin(),
-                       args[index].end(),
-                       ::isdigit)) {
-        oversized = true;
-        resize = std::stod(args[index]);
-        return true;
+    if (args[index-1] == "-r") {
+        try {
+            resize = std::stof(args[index]);
+            oversized = true;
+            return true;
+        } catch (std::invalid_argument&) {
+            return false;
+        }
     }
     return false;
+}
+
+const std::string &Parser::getFileName() const {
+    return fileName;
+}
+
+const std::string &Parser::getFileType() const {
+    return fileType;
+}
+
+bool Parser::isColored() const {
+    return colored;
+}
+
+bool Parser::isOversized() const {
+    return oversized;
+}
+
+float Parser::getResize() const {
+    return resize;
 }
