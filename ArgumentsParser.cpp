@@ -2,8 +2,8 @@
 // Created by jeannie on 2017.10.25..
 //
 
-
 #include "ArgumentsParser.h"
+#include ""
 
 Parser::Parser(int argc, char* argv[])
     : valid(false), colored(false), oversized(false), resize(1) {
@@ -17,7 +17,6 @@ Parser::Parser(int argc, char* argv[])
 Parser::~Parser() {}
 
 bool Parser::isValid() const { return valid; }
-
 
 void Parser::parseArguments() {
     if (args[0]!="-f") return;
@@ -92,7 +91,14 @@ void Parser::setFileTypeFromFileType() {
     } else if (args[3] == "png") {
         fileType = "jpg";
         valid = true;
-    } else valid = false;
+    } else {
+        valid = false;
+        return;
+    }
+    std::string temp = fileName.substr(fileName.size()-4, 4);
+    if (temp == ".bmp" || temp == ".jpg" || temp == ".png") {
+        fileName = fileName + fileType;
+    }
 }
 
 bool Parser::validResizeValueAtIndex(int index) {
