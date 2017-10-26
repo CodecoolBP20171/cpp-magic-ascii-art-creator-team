@@ -22,6 +22,7 @@ int main( int argc, char* argv[] )
 
     std::unique_ptr<ImageProcessor> c (new JpgProcessor(argc, argv));
     c->grayscale();
+    c->resize(0.2f);
     c->convertToAscii();
     c->writeToFile();
     c->showImage();

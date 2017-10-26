@@ -61,3 +61,29 @@ void ImageProcessor::convertToAscii() {
 }
 
 void ImageProcessor::grayscale() {}
+
+void ImageProcessor::resize(float percentage) {
+    std::vector<std::vector<unsigned char>> tempImage;
+
+    // get the size of the chunk to resize to
+    size_t chunkSize = grayscaleImage[0].size() / (grayscaleImage[0].size() * percentage);
+    size_t tempWidth = grayscaleImage[0].size() / chunkSize;
+    size_t tempHeight = grayscaleImage.size() / chunkSize;
+
+    for (int y = 0; y < tempHeight ; ++y) {
+        std::vector<unsigned char> rowOfPixels;
+        unsigned int averagedPixel;
+        for (int x = 0; x < tempWidth; ++x) {
+            averagedPixel = 0;
+            for (int i = 0; i < chunkSize; ++i) {
+                for (int j = 0; j < chunkSize; ++j) {
+                    averagedPixel += grayscaleImage[y*chunkSize+i][x*chunkSize+j];
+                }
+            }
+            averagedPixel = averagedPixel / (chunkSize * chunkSize);
+            rowOfPixels.push_back(static_cast<unsigned char>(averagedPixel));
+        }
+        tempImage.push_back(rowOfPixels);
+    }
+    grayscaleImage = tempImage;
+}
