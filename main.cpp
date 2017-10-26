@@ -21,5 +21,9 @@ int main( int argc, char* argv[] )
     //b->showImage();
 
     std::unique_ptr<ImageProcessor> c (new JpgProcessor(argc, argv));
+    //c->grayscale();
+    //c->convertToAscii();
+    //c->writeToFile();
+    //c->showImage();
     return 0;
 }
