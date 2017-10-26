@@ -15,9 +15,9 @@ int main( int argc, char* argv[] )
     char *sizesw = "-r";
     char *size = "0.5";
 
-    char* arr[] = {fname, fsw, fname, tsw, ft};
+    char* arr[] = {fname, fsw, fname, tsw, ft, sizesw, size, colsw};
 
-    Parser p(4, arr);
+    Parser p(8, arr);
 
     std::cout << "Valid: " << p.isValid();
     std::cout << ", filename: " << p.getFileName();

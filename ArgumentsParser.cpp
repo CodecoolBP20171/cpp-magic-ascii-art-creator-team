@@ -3,7 +3,6 @@
 //
 
 #include "ArgumentsParser.h"
-#include ""
 
 Parser::Parser(int argc, char* argv[])
     : valid(false), colored(false), oversized(false), resize(1) {
@@ -50,14 +49,18 @@ void Parser::parseArguments() {
     if (args.size() >= 5) {
         if (args[4] == "-color") {
                 colored = true;
-        } else if (!validResizeValueAtIndex(4)) {
+        } else if (args.size() == 5&&!validResizeValueAtIndex(4)) {
             valid = false;
         }
     }
 
     if (args.size() == 5) return;
 
-    if (args.size() >= 6 && !validResizeValueAtIndex(5)) { valid = false; }
+    if (args.size() >= 6) {
+         if (args.size() == 6 &&!validResizeValueAtIndex(5)) {
+             valid = false;
+         }
+    }
 
     if (args.size() == 7) {
         if (args[6] == "-color") {
@@ -96,8 +99,8 @@ void Parser::setFileTypeFromFileType() {
         return;
     }
     std::string temp = fileName.substr(fileName.size()-4, 4);
-    if (temp == ".bmp" || temp == ".jpg" || temp == ".png") {
-        fileName = fileName + fileType;
+    if (!(temp == ".bmp" || temp == ".jpg" || temp == ".png")) {
+        fileName = fileName + "." + fileType;
     }
 }
 
